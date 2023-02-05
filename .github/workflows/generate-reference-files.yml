@@ -1,0 +1,35 @@
+name: Generate
+
+on:
+  workflow_dispatch:
+
+jobs:
+  main:
+    runs-on: ubuntu-2004  # Required for Python 3.6.
+    name: Generate
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          repository: pmaupin/pdfrw
+      - uses: actions/checkout@v3
+        with:
+          repository: pmaupin/static_pdfs
+          path: pdfrw/tests/static_pdfs
+      - run: ls -l
+      - name: set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.6"
+      - name: prepare pip
+        run:
+          python -m pip install --upgrade pip wheel
+      - name: install package
+        run:
+          cd ../pdfrw && python -m pip install .
+      - name: install Python deps
+        run:
+          python -m pip install --upgrade reportlab pycrypto pytest
+      - name: run tests
+        run: |
+          cd ../pdfrw/tests
+          PYTHONPATH=. pytest --verbose
