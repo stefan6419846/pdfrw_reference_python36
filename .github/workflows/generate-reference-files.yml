@@ -37,3 +37,9 @@ jobs:
         if: always()
         run:
           tree tests/tmp_results/
+      - name: upload
+        uses: actions/upload-artifact@v3
+        with:
+          name: python36_results
+          path: |
+            tests/tmp_results/*
