@@ -6,7 +6,6 @@ on:
 jobs:
   main:
     runs-on: ubuntu-20.04  # Required for Python 3.6.
-    continue-on-error: true
     name: Generate
     steps:
       - uses: actions/checkout@v3
@@ -31,6 +30,7 @@ jobs:
         run:
           python -m pip install --upgrade reportlab==3.4.0 pycrypto pytest
       - name: run tests
+        continue-on-error: true
         run: |
           cd tests
           PYTHONPATH=. pytest --verbose
