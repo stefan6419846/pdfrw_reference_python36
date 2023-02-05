@@ -6,6 +6,7 @@ on:
 jobs:
   main:
     runs-on: ubuntu-20.04  # Required for Python 3.6.
+    continue-on-error: true
     name: Generate
     steps:
       - uses: actions/checkout@v3
@@ -33,3 +34,6 @@ jobs:
         run: |
           cd tests
           PYTHONPATH=. pytest --verbose
+      - name: display result directory
+        run:
+          tree tests/tmp_results/
