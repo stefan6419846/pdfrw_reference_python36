@@ -5,7 +5,7 @@ on:
 
 jobs:
   main:
-    runs-on: ubuntu-2004  # Required for Python 3.6.
+    runs-on: ubuntu-20.04  # Required for Python 3.6.
     name: Generate
     steps:
       - uses: actions/checkout@v3
